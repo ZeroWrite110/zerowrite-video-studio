@@ -1,0 +1,12 @@
+{
+  "scenes": [
+    { "kicker": "", "text": "Stop editing videos by hand.", "seconds": 2.5 },
+    { "kicker": "Step 1", "text": "Drop your raw clip in a folder.", "seconds": 3 },
+    { "kicker": "Step 2", "text": "Claude cuts the pauses and adds captions.", "seconds": 3.5 },
+    { "kicker": "Step 3", "text": "Post the finished reel.", "seconds": 3 }
+  ],
+  "background": "#0B0F19",
+  "accent": "#FFD60A",
+  "music": "",
+  "musicVolume": 0.25
+}

@@ -1,0 +1,18 @@
+ZeroWrite brand (taken from zerowrite.ai CSS, 2026-11-17)
+
+Background (ink)   #05090B   main dark background
+Panel              #0E1518   cards / panels
+Text               #E9EEF0
+Text secondary     #ADB6B9
+Accent (cyan)      #22D3EE   highlight word, e.g. "before"
+Accent bright      #67E8F9
+Accent deep        #0E7490
+Blue               #2563EB   logo gradient
+Logo navy          #27364F
+Safe (jade)        #2FD68C   "allowed"
+Warning (amber)    #E09112   "suspicious"
+Risk (red)         #F03E4D   "blocked / critical"
+
+Fonts: Inter (headlines, body), JetBrains Mono (labels, code-like text)
+Tagline on site: "Stop threats before they run."
+Sub-line on site: "Every new program is paused, read and judged before it can run."

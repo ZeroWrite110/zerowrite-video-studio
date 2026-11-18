@@ -1,0 +1,38 @@
+{
+  "name": "zerowrite-explainer-01",
+  "status": "DRAFT - claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "scenes": [
+    {
+      "type": "download",
+      "title": "You just downloaded this.",
+      "file": "invoice_0423.exe",
+      "vo": "You just downloaded an invoice. It looks completely normal."
+    },
+    {
+      "type": "ransomware",
+      "title": "One double-click later...",
+      "vo": "But if it's ransomware, it can start locking your files the moment it runs."
+    },
+    {
+      "type": "held",
+      "title": "Paused *before* it runs.",
+      "vo": "Zero Write pauses every new program, before it can run."
+    },
+    {
+      "type": "intent",
+      "title": "It reads the *intent*.",
+      "vo": "It reads what the program would do, and scores the risk."
+    },
+    {
+      "type": "verdict",
+      "title": "Then it *decides*.",
+      "vo": "If it is malicious, it is quarantined. If it is safe, it is allowed. And every decision is explained in plain language."
+    },
+    {
+      "type": "cta",
+      "title": "Stop threats before they run.",
+      "vo": "Zero Write. Stop threats before they run. Try it free, at zero write dot A I."
+    }
+  ]
+}

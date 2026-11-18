@@ -1,0 +1,24 @@
+Reference research for ZeroWrite videos (2026-11-17, by Claude)
+Studied for style only. Nothing is copied.
+
+Videos to look at (YouTube):
+- CrowdStrike "Welcome to CrowdStrike" (endpoint protection): https://www.youtube.com/watch?v=oIWxJzPfpyY
+  Calm, direct voice. Starts with the outcome ("We stop breaches"). Motion graphics and platform diagrams. Credibility before cleverness.
+- SentinelOne "Singularity Platform": https://www.youtube.com/watch?v=B-Uv8IJAo_Y
+  Kinetic typography, one consistent graphic system.
+- NinjaOne endpoint security (1 min, flat vector): https://youtu.be/v8eMEdRC3MY
+- Huntress (1 min 30 s, comic-style illustration, plain-English tone): https://youtu.be/xFpZxupyb4c
+- ThreatLocker "Introducing ThreatLocker in 60 seconds" and "Allowlisting in 4 minutes" (closest competitor idea: block what is not approved): https://www.threatlocker.com/resources/videos
+
+Patterns that work (from Vidico and ContentBeta 2026 roundups):
+- Lead with the consequence, not the technology.
+- Arc: problem -> consequence -> solution -> proof -> one clear next step.
+- 60 s to 2 min for website explainers; 20-30 s cuts for paid social / Reels.
+- Product shown as clean UI screens after the problem is set up.
+- Fast typography and icons for lists; one colour system throughout.
+
+How ZeroWrite stands apart visually:
+- Competitors use red/black "threat" palettes. ZeroWrite's site is dark ink + cyan, calm and technical.
+- Our strongest visual is the website's own "intent score" panel (+14, +32, +28 ... = 94, quarantined). Animate it.
+
+Sources: vidico.com/news/best-cybersecurity-explainer-videos, contentbeta.com/blog/cybersecurity-explainer-video-examples, threatlocker.com

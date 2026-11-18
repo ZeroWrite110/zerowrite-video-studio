@@ -1,0 +1,21 @@
+# Big or private media stays on this computer only
+Raw/*
+!Raw/_example-video-name/
+Export/
+Approved Videos/*
+!Approved Videos/.gitkeep
+*.mp4
+*.mov
+*.wav
+*.mp3
+
+# Engine build stuff
+studio/node_modules/
+studio/whisper.cpp/
+studio/.render/
+studio/out/
+studio/public/explainers/*.wav
+studio/public/explainers/*/
+node_modules/
+.DS_Store
+.env

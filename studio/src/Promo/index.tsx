@@ -12,24 +12,47 @@ import {
 } from "remotion";
 import { z } from "zod";
 import { Backdrop, Caption, Corner, LightLeak } from "./components/ui";
+import { Cleanup, CLEANUP_AT } from "./scenes/Cleanup";
 import { Cta, CLICK_AT } from "./scenes/Cta";
 import { FEATURE_AT, Features } from "./scenes/Features";
+import { Fleet, FLEET_AT } from "./scenes/Fleet";
 import { Hook } from "./scenes/Hook";
 import { How } from "./scenes/How";
 import { Problem } from "./scenes/Problem";
 import { Reveal } from "./scenes/Reveal";
+import { Tickets } from "./scenes/Tickets";
+import { STEP_AT, Timeline } from "./scenes/Timeline";
+import { Usb, USB_AT } from "./scenes/Usb";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
 const TAIL_SEC = 0.5;
-const HOLD_SEC: Partial<Record<SceneType, number>> = { reveal: 1.1, cta: 2.4 };
+const HOLD_SEC: Partial<Record<SceneType, number>> = {
+  reveal: 1.1,
+  cta: 2.4,
+  tickets: 0.7,
+  usb: 0.9,
+};
 const LEAK = 22; // light-leak overlay length at each cut
 
-type SceneType = "hook" | "problem" | "reveal" | "how" | "features" | "cta";
+type SceneType =
+  | "hook"
+  | "problem"
+  | "reveal"
+  | "how"
+  | "features"
+  | "cta"
+  // video 02 (MSP angle)
+  | "tickets"
+  | "cleanup"
+  | "timeline"
+  | "fleet"
+  | "usb";
 type Scene = {
   type: SceneType;
   chapter: string;
   vo: string;
+  caption?: string; // on-screen text when it differs from the spoken spelling
   audio: string;
   voSec: number;
 };
@@ -85,6 +108,16 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Features />;
     case "cta":
       return <Cta />;
+    case "tickets":
+      return <Tickets />;
+    case "cleanup":
+      return <Cleanup />;
+    case "timeline":
+      return <Timeline />;
+    case "fleet":
+      return <Fleet />;
+    case "usb":
+      return <Usb />;
   }
 };
 
@@ -112,6 +145,22 @@ const sceneSfx = (type: SceneType) => {
       ];
     case "cta":
       return [<Sfx key="c" at={CLICK_AT * FPS} src="mouse-click" volume={0.7} />];
+    case "tickets":
+      return [<Sfx key="t" at={2.7 * FPS} src="whoosh" volume={0.35} />];
+    case "cleanup":
+      return CLEANUP_AT.map((s) => <Sfx key={s} at={s * FPS} src="whip" volume={0.4} />);
+    case "timeline":
+      return [
+        <Sfx key="m" at={1.8 * FPS} src="whoosh" volume={0.45} />,
+        ...STEP_AT.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.5} />),
+      ];
+    case "fleet":
+      return FLEET_AT.verdicts.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.5} />);
+    case "usb":
+      return [
+        <Sfx key="u" at={USB_AT.plug * FPS + 8} src="mouse-click" volume={0.7} />,
+        <Sfx key="p" at={USB_AT.portal * FPS} src="whoosh" volume={0.4} />,
+      ];
     default:
       return [];
   }
@@ -120,7 +169,15 @@ const sceneSfx = (type: SceneType) => {
 export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
   if (!loaded) return null;
   const total = loaded.scenes.reduce((sum, s) => sum + sceneFrames(s), 0);
-  const withCaptions: SceneType[] = ["problem", "how", "features"];
+  const withCaptions: SceneType[] = [
+    "problem",
+    "how",
+    "features",
+    "cleanup",
+    "timeline",
+    "fleet",
+    "usb",
+  ];
   return (
     <AbsoluteFill>
       <Backdrop />
@@ -136,7 +193,7 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
                 <Visual type={scene.type} />
                 {scene.type !== "reveal" && scene.type !== "cta" ? <Corner /> : null}
                 {captions && withCaptions.includes(scene.type) ? (
-                  <Caption text={scene.vo} startFrame={VO_DELAY} seconds={scene.voSec} />
+                  <Caption text={scene.caption ?? scene.vo} startFrame={VO_DELAY} seconds={scene.voSec} />
                 ) : null}
                 <Sequence from={VO_DELAY} name="Voice" layout="none">
                   <Audio src={staticFile(scene.audio)} />

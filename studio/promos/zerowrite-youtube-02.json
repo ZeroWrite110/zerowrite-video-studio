@@ -1,0 +1,44 @@
+{
+  "name": "zerowrite-youtube-02",
+  "status": "DRAFT - MSP angle, adapted from T-002 Shorts 1 and 3; wording from zerowrite.ai + company facts, claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "tickets",
+      "chapter": "The ticket that never opens",
+      "vo": "For an M S P, the best security ticket is the one that never gets opened.",
+      "caption": "For an MSP, the best security ticket is the one that never gets opened."
+    },
+    {
+      "type": "cleanup",
+      "chapter": "The cleanup",
+      "vo": "When protection reacts after a file has already run, your work starts after it too. Clean up. Restores. And an awkward call with the client.",
+      "caption": "When protection reacts after a file has already run, your work starts after it too. Cleanup. Restores. And an awkward call with the client."
+    },
+    {
+      "type": "timeline",
+      "chapter": "Decide before it runs",
+      "vo": "Pre execution protection moves the decision earlier. A new file is held when it arrives, checked, and decided, before it runs.",
+      "caption": "Pre-execution protection moves the decision earlier. A new file is held when it arrives, checked, and decided, before it runs."
+    },
+    {
+      "type": "fleet",
+      "chapter": "Every machine you manage",
+      "vo": "Zero Write does this on every Windows ten and eleven machine you manage. Files are analysed locally, and given a risk score from low to critical. Then they are allowed, quarantined, deleted, or isolated.",
+      "caption": "ZeroWrite does this on every Windows 10 and 11 machine you manage. Files are analysed locally, and given a risk score from low to critical. Then they are allowed, quarantined, deleted, or isolated."
+    },
+    {
+      "type": "usb",
+      "chapter": "USB and policy",
+      "vo": "Removable drives are scanned the moment they connect. And one portal pushes policy to every machine.",
+      "caption": "Removable drives are scanned the moment they connect. And one portal pushes policy to every machine."
+    },
+    {
+      "type": "cta",
+      "chapter": "Free trial",
+      "vo": "Try Zero Write on a test machine. Free trial, no card needed, at zero write dot A I.",
+      "caption": "Try ZeroWrite on a test machine. Free trial, no card needed, at zerowrite.ai."
+    }
+  ]
+}

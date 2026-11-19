@@ -20,7 +20,7 @@ Owner is a non-coder who speaks Roman Urdu/Hindi. They ask for edits in plain wo
 - `src/TextReel/`: text scenes with slide transitions, optional music from `public/music`.
 
 ## YouTube promo (16:9 motion graphics)
-- Scenes: hook, problem, reveal, how, features, cta (`src/Promo/scenes`). GSAP is used only through `useGsapTimeline` from `@remotion/gsap` (deterministic). 3D uses `@remotion/three`, motion blur uses `HtmlInCanvasMotionBlur`, and light leaks use `@remotion/effects` (WebGL: `Config.setChromiumOpenGlRenderer("angle")`).
+- Scenes: hook, problem, reveal, how, features, cta (video 01) and tickets, cleanup, timeline, fleet (3D laptops), usb (video 02, MSP angle), in `src/Promo/scenes`. Mix them in any order in `promos/<name>.json`. Optional `caption` per scene = on-screen text when the voice spelling differs ("M S P", "Pre execution"). GSAP is used only through `useGsapTimeline` from `@remotion/gsap` (deterministic). 3D uses `@remotion/three`, motion blur uses `HtmlInCanvasMotionBlur`, and light leaks use `@remotion/effects` (WebGL: `Config.setChromiumOpenGlRenderer("angle")`).
 - Assets must have a free licence. List each one in `Export/<name>/credits.txt`. SFX in `public/sfx` are CC0. The music file (Mixkit) is gitignored, so download it again from the URL in credits.txt.
 - Put the claims that need approval, plus the YouTube title, description, chapters and tags, in `Export/<name>/notes.txt`.
 

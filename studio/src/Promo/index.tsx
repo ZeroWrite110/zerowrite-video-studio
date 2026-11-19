@@ -39,6 +39,11 @@ import { Portal, PORTAL_AT } from "./scenes/Portal";
 import { Policy, POLICY_AT } from "./scenes/Policy";
 import { Globe, GLOBE_AT } from "./scenes/Globe";
 import { Inbox, INBOX_AT } from "./scenes/Inbox";
+import { Signs, SIGNS_AT } from "./scenes/Signs";
+import { Bulk, BULK_AT } from "./scenes/Bulk";
+import { Shadow, SHADOW_AT } from "./scenes/Shadow";
+import { Hide, HIDE_AT } from "./scenes/Hide";
+import { Weigh, WEIGH_AT } from "./scenes/Weigh";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -63,6 +68,11 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   policy: 0.8,
   globe: 1.3,
   inbox: 0.9,
+  signs: 0.6,
+  bulk: 0.9,
+  shadow: 0.9,
+  hide: 1.0,
+  weigh: 1.4,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -98,7 +108,13 @@ type SceneType =
   | "portal"
   | "policy"
   | "globe"
-  | "inbox";
+  | "inbox"
+  // video 07 (educational: 3 signs a file is malicious before it runs)
+  | "signs"
+  | "bulk"
+  | "shadow"
+  | "hide"
+  | "weigh";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -201,6 +217,16 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Globe />;
     case "inbox":
       return <Inbox />;
+    case "signs":
+      return <Signs />;
+    case "bulk":
+      return <Bulk />;
+    case "shadow":
+      return <Shadow />;
+    case "hide":
+      return <Hide />;
+    case "weigh":
+      return <Weigh />;
   }
 };
 
@@ -343,6 +369,31 @@ const sceneSfx = (type: SceneType) => {
         ...[INBOX_AT.allow, INBOX_AT.restore, INBOX_AT.remove].map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.5} />),
         <Sfx key="r" at={INBOX_AT.record * FPS} src="whoosh" volume={0.4} />,
       ];
+    case "signs":
+      return [
+        <Sfx key="f" at={SIGNS_AT.file * FPS} src="whoosh" volume={0.4} />,
+        ...SIGNS_AT.numbers.map((s) => <Sfx key={s} at={s * FPS - 1} src="whip" volume={0.45} />),
+      ];
+    case "bulk":
+      return [
+        <Sfx key="s" at={BULK_AT.sweep * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="l" at={BULK_AT.lock * FPS} src="switch" volume={0.55} />,
+      ];
+    case "shadow":
+      return [0, 1, 2, 3, 4].map((i) => (
+        <Sfx key={i} at={(SHADOW_AT.delete + i * SHADOW_AT.gap) * FPS} src={i % 2 ? "switch" : "whip"} volume={0.35} />
+      ));
+    case "hide":
+      return [
+        ...[HIDE_AT.shell, HIDE_AT.encoded].map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.45} />),
+        <Sfx key="i" at={HIDE_AT.inject * FPS - 2} src="whoosh" volume={0.55} />,
+      ];
+    case "weigh":
+      return [
+        <Sfx key="r" at={WEIGH_AT.runKey * FPS} src="switch" volume={0.45} />,
+        <Sfx key="s" at={WEIGH_AT.score * FPS} src="whoosh" volume={0.4} />,
+        <Sfx key="v" at={WEIGH_AT.verdict * FPS} src="whip" volume={0.55} />,
+      ];
     default:
       return [];
   }
@@ -373,6 +424,11 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     "policy",
     "globe",
     "inbox",
+    "signs",
+    "bulk",
+    "shadow",
+    "hide",
+    "weigh",
   ];
   return (
     <AbsoluteFill>

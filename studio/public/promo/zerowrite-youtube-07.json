@@ -1,0 +1,56 @@
+{
+  "name": "zerowrite-youtube-07",
+  "status": "DRAFT - educational '3 signs a file is malicious before it runs'; behaviours and weights from the zerowrite.ai behavioural-engine animation (EngineStage samples) and feature tiles, claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "signs",
+      "chapter": "Can you spot it before it runs?",
+      "vo": "Can you tell a file is dangerous before it runs? You can, by what it would do. Here are three signs.",
+      "caption": "Can you tell a file is dangerous before it runs? You can, by what it would do. Here are three signs.",
+      "audio": "promo/zerowrite-youtube-07/vo-1.wav",
+      "voSec": 5.178
+    },
+    {
+      "type": "bulk",
+      "chapter": "Sign 1: it reads your documents in bulk",
+      "vo": "Sign one. It goes after your documents in bulk. Reading every document at once is the first step towards encrypting them.",
+      "caption": "Sign one. It goes after your documents in bulk. Reading every document at once is the first step towards encrypting them.",
+      "audio": "promo/zerowrite-youtube-07/vo-2.wav",
+      "voSec": 5.828
+    },
+    {
+      "type": "shadow",
+      "chapter": "Sign 2: it deletes your way back",
+      "vo": "Sign two. It deletes your way back. Ransomware deletes volume shadow copies, so your files cannot be restored.",
+      "caption": "Sign two. It deletes your way back. Ransomware deletes volume shadow copies, so your files cannot be restored.",
+      "audio": "promo/zerowrite-youtube-07/vo-3.wav",
+      "voSec": 5.997
+    },
+    {
+      "type": "hide",
+      "chapter": "Sign 3: it hides inside something trusted",
+      "vo": "Sign three. It hides inside something trusted. A document starts PowerShell, runs a hidden command, and injects into explorer.",
+      "caption": "Sign three. It hides inside something trusted. A document starts PowerShell, runs a hidden command, and injects into explorer.exe.",
+      "audio": "promo/zerowrite-youtube-07/vo-4.wav",
+      "voSec": 7.338
+    },
+    {
+      "type": "weigh",
+      "chapter": "One sign is not a verdict",
+      "vo": "One sign alone can be normal. An installer writes a startup key too. Zero Write scores the behaviours together, before the file runs, and reaches a verdict.",
+      "caption": "One sign alone can be normal. An installer writes a startup key too. ZeroWrite scores the behaviours together, before the file runs, and reaches a verdict.",
+      "audio": "promo/zerowrite-youtube-07/vo-5.wav",
+      "voSec": 8.112
+    },
+    {
+      "type": "cta",
+      "chapter": "Try it free",
+      "vo": "Zero Write. Stop threats before they run. Try it free, no card needed, at zero write dot A I.",
+      "caption": "ZeroWrite. Stop threats before they run. Try it free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-07/vo-6.wav",
+      "voSec": 5.782
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "zerowrite-youtube-03",
+  "status": "DRAFT - home-user / double-click angle, adapted from T-002 Short 1 and 2; wording from zerowrite.ai (home Compare section, Device control, platform intro) + company facts, claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "download",
+      "chapter": "The double-click",
+      "vo": "You download a file. You double click it. What happens in the next second matters most.",
+      "caption": "You download a file. You double-click it. What happens in the next second matters most.",
+      "audio": "promo/zerowrite-youtube-03/vo-1.wav",
+      "voSec": 4.11
+    },
+    {
+      "type": "split",
+      "chapter": "Two ways to meet the same file",
+      "vo": "With detect and respond, the decision comes after the program starts. Until then, unknown code can do whatever it was written to do. But Zero Write decides before its first instruction. The program is suspended, and waits for a verdict.",
+      "caption": "With detect and respond, the decision comes after the program starts. Until then, unknown code can do whatever it was written to do. But ZeroWrite decides before its first instruction. The program is suspended, and waits for a verdict.",
+      "audio": "promo/zerowrite-youtube-03/vo-2.wav",
+      "voSec": 13.347
+    },
+    {
+      "type": "explode",
+      "chapter": "Intent, scored on behaviour",
+      "vo": "Nothing depends on signatures. Intent is scored on behaviour. Each behaviour is weighed, one by one, on your own machine, until the engine reaches a verdict.",
+      "caption": "Nothing depends on signatures. Intent is scored on behaviour. Each behaviour is weighed, one by one, on your own machine, until the engine reaches a verdict.",
+      "audio": "promo/zerowrite-youtube-03/vo-3.wav",
+      "voSec": 8.647
+    },
+    {
+      "type": "guard",
+      "chapter": "Downloads, scripts, injected code",
+      "vo": "Downloads, scripts and injected code all pass the same checkpoint. A browser extension checks files as they arrive from the web. And what is left to clean up? Only the quarantined program.",
+      "caption": "Downloads, scripts and injected code all pass the same checkpoint. A browser extension checks files as they arrive from the web. And what is left to clean up? Only the quarantined program.",
+      "audio": "promo/zerowrite-youtube-03/vo-4.wav",
+      "voSec": 10.269
+    },
+    {
+      "type": "cta",
+      "chapter": "Free trial",
+      "vo": "Every program waits for a verdict. Try Zero Write free, no card needed, at zero write dot A I.",
+      "caption": "Every program waits for a verdict. Try ZeroWrite free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-03/vo-5.wav",
+      "voSec": 5.642
+    }
+  ]
+}

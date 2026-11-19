@@ -23,6 +23,10 @@ import { Reveal } from "./scenes/Reveal";
 import { Tickets } from "./scenes/Tickets";
 import { STEP_AT, Timeline } from "./scenes/Timeline";
 import { Usb, USB_AT } from "./scenes/Usb";
+import { Download, DOWNLOAD_AT } from "./scenes/Download";
+import { Explode, EXPLODE_AT } from "./scenes/Explode";
+import { Guard, GUARD_AT } from "./scenes/Guard";
+import { Split, SPLIT_AT } from "./scenes/Split";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -32,6 +36,9 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   cta: 2.4,
   tickets: 0.7,
   usb: 0.9,
+  download: 0.6,
+  explode: 0.9,
+  guard: 0.7,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -47,7 +54,12 @@ type SceneType =
   | "cleanup"
   | "timeline"
   | "fleet"
-  | "usb";
+  | "usb"
+  // video 03 (double-click / home-user angle)
+  | "download"
+  | "split"
+  | "explode"
+  | "guard";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -118,6 +130,14 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Fleet />;
     case "usb":
       return <Usb />;
+    case "download":
+      return <Download />;
+    case "split":
+      return <Split />;
+    case "explode":
+      return <Explode />;
+    case "guard":
+      return <Guard />;
   }
 };
 
@@ -161,6 +181,31 @@ const sceneSfx = (type: SceneType) => {
         <Sfx key="u" at={USB_AT.plug * FPS + 8} src="mouse-click" volume={0.7} />,
         <Sfx key="p" at={USB_AT.portal * FPS} src="whoosh" volume={0.4} />,
       ];
+    case "download":
+      return [
+        <Sfx key="c1" at={DOWNLOAD_AT.click * FPS} src="mouse-click" volume={0.7} />,
+        <Sfx key="c2" at={DOWNLOAD_AT.click * FPS + 6} src="mouse-click" volume={0.7} />,
+        <Sfx key="w" at={(DOWNLOAD_AT.freeze - 0.35) * FPS} src="whoosh" volume={0.45} />,
+      ];
+    case "split":
+      return [
+        <Sfx key="a" at={0.5 * FPS} src="whip" volume={0.4} />,
+        <Sfx key="b" at={SPLIT_AT.right * FPS} src="whip" volume={0.4} />,
+        <Sfx key="c" at={(SPLIT_AT.right + 0.5) * FPS} src="switch" volume={0.6} />,
+      ];
+    case "explode":
+      return [
+        <Sfx key="x" at={EXPLODE_AT.burst * FPS - 2} src="whoosh" volume={0.55} />,
+        ...EXPLODE_AT.behaviours.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.45} />),
+        <Sfx key="v" at={EXPLODE_AT.verdict * FPS} src="whip" volume={0.5} />,
+      ];
+    case "guard":
+      return [
+        ...GUARD_AT.sources.map((s) => <Sfx key={s} at={s * FPS} src="whip" volume={0.35} />),
+        <Sfx key="b" at={(GUARD_AT.browser - 0.1) * FPS} src="whoosh" volume={0.4} />,
+        <Sfx key="d" at={GUARD_AT.arrived * FPS} src="switch" volume={0.6} />,
+        <Sfx key="c" at={GUARD_AT.cleanup * FPS} src="whoosh" volume={0.4} />,
+      ];
     default:
       return [];
   }
@@ -177,6 +222,9 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     "timeline",
     "fleet",
     "usb",
+    "split",
+    "explode",
+    "guard",
   ];
   return (
     <AbsoluteFill>

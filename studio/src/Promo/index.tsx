@@ -44,6 +44,10 @@ import { Bulk, BULK_AT } from "./scenes/Bulk";
 import { Shadow, SHADOW_AT } from "./scenes/Shadow";
 import { Hide, HIDE_AT } from "./scenes/Hide";
 import { Weigh, WEIGH_AT } from "./scenes/Weigh";
+import { Fingerprint, FINGERPRINT_AT } from "./scenes/Fingerprint";
+import { Variants, VARIANTS_AT } from "./scenes/Variants";
+import { Waitline, WAITLINE_AT } from "./scenes/Waitline";
+import { Onsite, ONSITE_AT } from "./scenes/Onsite";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -73,6 +77,10 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   shadow: 0.9,
   hide: 1.0,
   weigh: 1.4,
+  fingerprint: 0.9,
+  variants: 0.8,
+  waitline: 1.0,
+  onsite: 1.2,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -114,7 +122,12 @@ type SceneType =
   | "bulk"
   | "shadow"
   | "hide"
-  | "weigh";
+  | "weigh"
+  // video 08 (educational: why signatures miss new malware)
+  | "fingerprint"
+  | "variants"
+  | "waitline"
+  | "onsite";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -227,6 +240,14 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Hide />;
     case "weigh":
       return <Weigh />;
+    case "fingerprint":
+      return <Fingerprint />;
+    case "variants":
+      return <Variants />;
+    case "waitline":
+      return <Waitline />;
+    case "onsite":
+      return <Onsite />;
   }
 };
 
@@ -394,6 +415,32 @@ const sceneSfx = (type: SceneType) => {
         <Sfx key="s" at={WEIGH_AT.score * FPS} src="whoosh" volume={0.4} />,
         <Sfx key="v" at={WEIGH_AT.verdict * FPS} src="whip" volume={0.55} />,
       ];
+    case "fingerprint":
+      return [
+        <Sfx key="s" at={FINGERPRINT_AT.signature * FPS} src="whoosh" volume={0.4} />,
+        <Sfx key="m" at={FINGERPRINT_AT.change * FPS} src="whoosh" volume={0.4} />,
+        <Sfx key="b" at={FINGERPRINT_AT.byte * FPS} src="switch" volume={0.6} />,
+        <Sfx key="n" at={FINGERPRINT_AT.noMatch * FPS} src="whip" volume={0.55} />,
+      ];
+    case "variants":
+      return [
+        <Sfx key="r" at={VARIANTS_AT.rebuild * FPS} src="whoosh" volume={0.5} />,
+        ...[0, 6, 12].map((k) => <Sfx key={k} at={(VARIANTS_AT.rebuild + k * VARIANTS_AT.gap) * FPS} src="switch" volume={0.35} />),
+        <Sfx key="n" at={VARIANTS_AT.looksNew * FPS} src="whip" volume={0.45} />,
+      ];
+    case "waitline":
+      return [
+        <Sfx key="w" at={WAITLINE_AT.written * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="s" at={WAITLINE_AT.stop * FPS} src="switch" volume={0.5} />,
+        <Sfx key="r" at={WAITLINE_AT.runs * FPS} src="whip" volume={0.5} />,
+      ];
+    case "onsite":
+      return [
+        <Sfx key="c" at={(ONSITE_AT.clock + 0.4) * FPS} src="switch" volume={0.5} />,
+        ...ONSITE_AT.behaviours.map((t) => <Sfx key={t} at={t * FPS} src="switch" volume={0.3} />),
+        <Sfx key="v" at={(ONSITE_AT.verdict - 0.1) * FPS} src="whip" volume={0.55} />,
+        <Sfx key="r" at={ONSITE_AT.reputation * FPS} src="whoosh" volume={0.35} />,
+      ];
     default:
       return [];
   }
@@ -429,6 +476,10 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     "shadow",
     "hide",
     "weigh",
+    "fingerprint",
+    "variants",
+    "waitline",
+    "onsite",
   ];
   return (
     <AbsoluteFill>

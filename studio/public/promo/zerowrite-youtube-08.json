@@ -1,0 +1,48 @@
+{
+  "name": "zerowrite-youtube-08",
+  "status": "DRAFT - educational 'why signatures miss new malware'; wording from the zerowrite.ai website (about page 'No dependency on signatures', platform tiles 'Judged on behaviour' and 'No signature to wait for', home Compare table), claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "fingerprint",
+      "chapter": "What a signature is",
+      "vo": "Why does antivirus miss brand new malware? A signature is a fingerprint of a file someone has already seen. Change one byte, and the fingerprint changes. No match.",
+      "caption": "Why does antivirus miss brand new malware? A signature is a fingerprint of a file someone has already seen. Change one byte, and the fingerprint changes. No match.",
+      "audio": "promo/zerowrite-youtube-08/vo-1.wav",
+      "voSec": 9.33
+    },
+    {
+      "type": "variants",
+      "chapter": "Every copy looks new",
+      "vo": "Attackers know this. They rebuild the same malware again and again, so every copy looks new to the list.",
+      "caption": "Attackers know this. They rebuild the same malware again and again, so every copy looks new to the list.",
+      "audio": "promo/zerowrite-youtube-08/vo-2.wav",
+      "voSec": 5.944
+    },
+    {
+      "type": "waitline",
+      "chapter": "The wait for a new signature",
+      "vo": "Then there is the wait. A new signature has to be written and shipped before a list can stop that file. Until it arrives, the file can run.",
+      "caption": "Then there is the wait. A new signature has to be written and shipped before a list can stop that file. Until it arrives, the file can run.",
+      "audio": "promo/zerowrite-youtube-08/vo-3.wav",
+      "voSec": 6.908
+    },
+    {
+      "type": "onsite",
+      "chapter": "No signature to wait for",
+      "vo": "Zero Write has no signature to wait for. A file no one has seen before is judged on what it would do, on the machine, when it arrives. Reputation lookups only add detail.",
+      "caption": "ZeroWrite has no signature to wait for. A file no one has seen before is judged on what it would do, on the machine, when it arrives. Reputation lookups only add detail.",
+      "audio": "promo/zerowrite-youtube-08/vo-4.wav",
+      "voSec": 9.276
+    },
+    {
+      "type": "cta",
+      "chapter": "Try it free",
+      "vo": "Zero Write. Stop threats before they run. Try it free, no card needed, at zero write dot A I.",
+      "caption": "ZeroWrite. Stop threats before they run. Try it free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-08/vo-5.wav",
+      "voSec": 5.861
+    }
+  ]
+}

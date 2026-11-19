@@ -8,7 +8,8 @@
 //                                                           (run scripts/voiceover.mjs <name> first; --no-subtitles)
 //   node scripts/render.mjs --promo <name>                  16:9 YouTubePromo from promos/<name>.json
 //                                                           (run scripts/voiceover.mjs <name> --promo first;
-//                                                           --no-captions, --no-music)
+//                                                           --no-captions, --no-music; audio is loudness-
+//                                                           normalised to -14 LUFS: --lufs N, --no-loudnorm)
 //   add --still to render only a preview image (frame 30, or --frame <n>)
 //
 // Options for CaptionedReel: --size 9:16|16:9|1:1, --position middle|lower,
@@ -48,6 +49,7 @@ const valueFlags = new Set([
   "--explainer",
   "--promo",
   "--frame",
+  "--lufs",
 ]);
 const positional = args.filter(
   (a, i) => !a.startsWith("--") && !valueFlags.has(args[i - 1]),
@@ -161,6 +163,28 @@ if (!still && captionsFile && fs.existsSync(captionsFile)) {
   }
   if (line.length) lines.push(line);
   fs.writeFileSync(path.join(outDir, "captions.srt"), serializeSrt({ lines }));
+}
+// YouTube promos: two-pass loudnorm of the audio to -14 LUFS (YouTube's reference),
+// video stream copied untouched. --lufs N to change, --no-loudnorm to skip.
+if (!still && composition === "YouTubePromo" && !flag("--no-loudnorm")) {
+  const lufs = option("--lufs") ?? "-14";
+  const base = `loudnorm=I=${lufs}:TP=-1.0:LRA=11`;
+  const m = spawnSync("ffmpeg", ["-hide_banner", "-i", target, "-vn", "-af", `${base}:print_format=json`, "-f", "null", "-"], {
+    encoding: "utf8",
+    maxBuffer: 1 << 26,
+  });
+  const block = m.stderr.match(/\{[^{}]*"input_i"[^{}]*\}/);
+  if (!block) throw new Error(`loudnorm measure failed: ${m.stderr.slice(-800)}`);
+  const json = JSON.parse(block[0]);
+  const tmpOut = path.join(outDir, "video.loudnorm.mp4");
+  const a = spawnSync("ffmpeg", [
+    "-hide_banner", "-loglevel", "error", "-y", "-i", target, "-c:v", "copy",
+    "-af", `${base}:measured_I=${json.input_i}:measured_TP=${json.input_tp}:measured_LRA=${json.input_lra}:measured_thresh=${json.input_thresh}:offset=${json.target_offset}:linear=true`,
+    "-ar", "48000", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", tmpOut,
+  ], { stdio: "inherit" });
+  if (a.status !== 0) process.exit(a.status ?? 1);
+  fs.renameSync(tmpOut, target);
+  console.log(`Loudness: ${json.input_i} LUFS -> ${lufs} LUFS target`);
 }
 // Every finished video is also copied to the owner's Desktop folder "Completed Video".
 if (!still) {

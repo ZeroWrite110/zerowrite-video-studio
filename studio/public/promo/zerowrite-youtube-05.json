@@ -1,0 +1,48 @@
+{
+  "name": "zerowrite-youtube-05",
+  "status": "DRAFT - educational explainer 'What is pre-execution protection?' aimed at YouTube search; wording from zerowrite.ai (home FAQ, feature tiles, Endpoint protection page), claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "define",
+      "chapter": "What is pre-execution protection?",
+      "vo": "What is pre execution protection? It means deciding whether new code may run, before it runs.",
+      "caption": "What is pre-execution protection? It means deciding whether new code may run, before it runs.",
+      "audio": "promo/zerowrite-youtube-05/vo-1.wav",
+      "voSec": 5.571
+    },
+    {
+      "type": "checkpoint",
+      "chapter": "Held the moment it arrives",
+      "vo": "Antivirus usually acts once code is already in memory. Pre execution protection holds every new program, script and injected payload at a checkpoint, the moment it arrives.",
+      "caption": "Antivirus usually acts once code is already in memory. Pre-execution protection holds every new program, script and injected payload at a checkpoint, the moment it arrives.",
+      "audio": "promo/zerowrite-youtube-05/vo-2.wav",
+      "voSec": 10.843
+    },
+    {
+      "type": "signatures",
+      "chapter": "Judged on intent, not signatures",
+      "vo": "Then it reads intent. A file no one has seen before is judged on what it would do, so it does not need a signature to be stopped.",
+      "caption": "Then it reads intent. A file no one has seen before is judged on what it would do, so it does not need a signature to be stopped.",
+      "audio": "promo/zerowrite-youtube-05/vo-3.wav",
+      "voSec": 7.16
+    },
+    {
+      "type": "recap",
+      "chapter": "Three steps",
+      "vo": "So the whole idea fits in three steps. Hold the code. Read its intent. Decide, before it runs. Nothing runs without a verdict.",
+      "caption": "So the whole idea fits in three steps. Hold the code. Read its intent. Decide, before it runs. Nothing runs without a verdict.",
+      "audio": "promo/zerowrite-youtube-05/vo-4.wav",
+      "voSec": 7.825
+    },
+    {
+      "type": "cta",
+      "chapter": "Try it free",
+      "vo": "That is pre execution protection. Zero Write brings it to Windows ten and eleven. Try it free, no card needed, at zero write dot A I.",
+      "caption": "That is pre-execution protection. ZeroWrite brings it to Windows 10 and 11. Try it free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-05/vo-5.wav",
+      "voSec": 8.124
+    }
+  ]
+}

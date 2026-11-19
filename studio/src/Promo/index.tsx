@@ -31,6 +31,10 @@ import { Tamper, TAMPER_AT } from "./scenes/Tamper";
 import { Ledger, LEDGER_AT } from "./scenes/Ledger";
 import { Isolate, ISOLATE_AT } from "./scenes/Isolate";
 import { Resilient, RESILIENT_AT } from "./scenes/Resilient";
+import { Define, DEFINE_AT } from "./scenes/Define";
+import { Checkpoint, CHECKPOINT_AT } from "./scenes/Checkpoint";
+import { Signatures, SIGNATURES_AT } from "./scenes/Signatures";
+import { Recap, RECAP_AT } from "./scenes/Recap";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -47,6 +51,10 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   ledger: 0.6,
   isolate: 0.8,
   resilient: 1.2,
+  define: 0.5,
+  checkpoint: 0.6,
+  signatures: 0.8,
+  recap: 1.1,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -72,7 +80,12 @@ type SceneType =
   | "tamper"
   | "ledger"
   | "isolate"
-  | "resilient";
+  | "resilient"
+  // video 05 (educational: what is pre-execution protection?)
+  | "define"
+  | "checkpoint"
+  | "signatures"
+  | "recap";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -159,6 +172,14 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Isolate />;
     case "resilient":
       return <Resilient />;
+    case "define":
+      return <Define />;
+    case "checkpoint":
+      return <Checkpoint />;
+    case "signatures":
+      return <Signatures />;
+    case "recap":
+      return <Recap />;
   }
 };
 
@@ -253,6 +274,30 @@ const sceneSfx = (type: SceneType) => {
         <Sfx key="u" at={RESILIENT_AT.updates * FPS} src="whoosh" volume={0.45} />,
         <Sfx key="s" at={RESILIENT_AT.stays * FPS} src="whoosh" volume={0.45} />,
       ];
+    case "define":
+      return [
+        <Sfx key="t" at={DEFINE_AT.term * FPS} src="switch" volume={0.4} />,
+        <Sfx key="b" at={DEFINE_AT.before * FPS - 2} src="whip" volume={0.5} />,
+      ];
+    case "checkpoint":
+      return [
+        <Sfx key="m" at={CHECKPOINT_AT.memory * FPS - 4} src="whip" volume={0.4} />,
+        <Sfx key="g" at={CHECKPOINT_AT.gate * FPS} src="whoosh" volume={0.5} />,
+        ...CHECKPOINT_AT.arrive.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.45} />),
+        <Sfx key="f" at={CHECKPOINT_AT.flare * FPS} src="whoosh" volume={0.4} />,
+      ];
+    case "signatures":
+      return [
+        <Sfx key="u" at={SIGNATURES_AT.unseen * FPS} src="switch" volume={0.5} />,
+        <Sfx key="l" at={(SIGNATURES_AT.judged - 0.45) * FPS} src="whoosh" volume={0.45} />,
+        ...SIGNATURES_AT.intents.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.35} />),
+        <Sfx key="s" at={SIGNATURES_AT.stopped * FPS} src="whip" volume={0.55} />,
+      ];
+    case "recap":
+      return [
+        ...RECAP_AT.steps.map((s) => <Sfx key={s} at={s * FPS - 6} src="whip" volume={0.45} />),
+        <Sfx key="v" at={RECAP_AT.verdict * FPS} src="whoosh" volume={0.5} />,
+      ];
     default:
       return [];
   }
@@ -276,6 +321,9 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     "ledger",
     "isolate",
     "resilient",
+    // define and recap already spell the line out on screen
+    "checkpoint",
+    "signatures",
   ];
   return (
     <AbsoluteFill>

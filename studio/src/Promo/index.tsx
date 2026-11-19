@@ -27,6 +27,10 @@ import { Download, DOWNLOAD_AT } from "./scenes/Download";
 import { Explode, EXPLODE_AT } from "./scenes/Explode";
 import { Guard, GUARD_AT } from "./scenes/Guard";
 import { Split, SPLIT_AT } from "./scenes/Split";
+import { Tamper, TAMPER_AT } from "./scenes/Tamper";
+import { Ledger, LEDGER_AT } from "./scenes/Ledger";
+import { Isolate, ISOLATE_AT } from "./scenes/Isolate";
+import { Resilient, RESILIENT_AT } from "./scenes/Resilient";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -39,6 +43,10 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   download: 0.6,
   explode: 0.9,
   guard: 0.7,
+  tamper: 0.8,
+  ledger: 0.6,
+  isolate: 0.8,
+  resilient: 1.2,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -59,7 +67,12 @@ type SceneType =
   | "download"
   | "split"
   | "explode"
-  | "guard";
+  | "guard"
+  // video 04 (control angle)
+  | "tamper"
+  | "ledger"
+  | "isolate"
+  | "resilient";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -138,6 +151,14 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Explode />;
     case "guard":
       return <Guard />;
+    case "tamper":
+      return <Tamper />;
+    case "ledger":
+      return <Ledger />;
+    case "isolate":
+      return <Isolate />;
+    case "resilient":
+      return <Resilient />;
   }
 };
 
@@ -206,6 +227,32 @@ const sceneSfx = (type: SceneType) => {
         <Sfx key="d" at={GUARD_AT.arrived * FPS} src="switch" volume={0.6} />,
         <Sfx key="c" at={GUARD_AT.cleanup * FPS} src="whoosh" volume={0.4} />,
       ];
+    case "tamper":
+      return [
+        <Sfx key="c" at={TAMPER_AT.click * FPS} src="mouse-click" volume={0.7} />,
+        <Sfx key="l" at={(TAMPER_AT.lock + 0.2) * FPS} src="whip" volume={0.55} />,
+        <Sfx key="a" at={TAMPER_AT.admin * FPS} src="switch" volume={0.5} />,
+        <Sfx key="p" at={TAMPER_AT.portal * FPS} src="switch" volume={0.5} />,
+      ];
+    case "ledger":
+      return [
+        <Sfx key="d" at={LEDGER_AT.remove * FPS + 3} src="mouse-click" volume={0.7} />,
+        <Sfx key="f" at={LEDGER_AT.fly * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="l" at={LEDGER_AT.land * FPS} src="switch" volume={0.55} />,
+      ];
+    case "isolate":
+      return [
+        <Sfx key="c" at={ISOLATE_AT.click * FPS} src="mouse-click" volume={0.7} />,
+        <Sfx key="x" at={ISOLATE_AT.cut * FPS - 10} src="whip" volume={0.5} />,
+        <Sfx key="r" at={ISOLATE_AT.release * FPS} src="whoosh" volume={0.4} />,
+      ];
+    case "resilient":
+      return [
+        <Sfx key="o" at={RESILIENT_AT.offline * FPS} src="switch" volume={0.5} />,
+        <Sfx key="e" at={RESILIENT_AT.expired * FPS} src="whip" volume={0.45} />,
+        <Sfx key="u" at={RESILIENT_AT.updates * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="s" at={RESILIENT_AT.stays * FPS} src="whoosh" volume={0.45} />,
+      ];
     default:
       return [];
   }
@@ -225,6 +272,10 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     "split",
     "explode",
     "guard",
+    "tamper",
+    "ledger",
+    "isolate",
+    "resilient",
   ];
   return (
     <AbsoluteFill>

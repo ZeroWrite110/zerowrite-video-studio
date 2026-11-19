@@ -1,0 +1,48 @@
+{
+  "name": "zerowrite-youtube-04",
+  "status": "DRAFT - control angle (tamper protection, decide and record, isolation, offline resilience); wording from zerowrite.ai (Response & fleet page, Device control, Security page, platform FAQ), claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "tamper",
+      "chapter": "Who can turn it off?",
+      "vo": "What if someone tries to turn your protection off? With Zero Write, standard users cannot change the agent's files. Only an admin, or the portal, can lower protection.",
+      "caption": "What if someone tries to turn your protection off? With ZeroWrite, standard users cannot change the agent's files. Only an admin, or the portal, can lower protection.",
+      "audio": "promo/zerowrite-youtube-04/vo-1.wav",
+      "voSec": 8.354
+    },
+    {
+      "type": "ledger",
+      "chapter": "You decide, it's on the record",
+      "vo": "When a file is held, you decide. Allow it, restore it if the verdict was wrong, or delete it. Every decision is kept in a local history, so it can always be traced.",
+      "caption": "When a file is held, you decide. Allow it, restore it if the verdict was wrong, or delete it. Every decision is kept in a local history, so it can always be traced.",
+      "audio": "promo/zerowrite-youtube-04/vo-2.wav",
+      "voSec": 9.342
+    },
+    {
+      "type": "isolate",
+      "chapter": "Isolate in one step",
+      "vo": "If a machine holds a threat, isolate it in one step. It is cut off from everything except Zero Write, so it can still be managed, and released once it is clean.",
+      "caption": "If a machine holds a threat, isolate it in one step. It is cut off from everything except ZeroWrite.ai, so it can still be managed, and released once it is clean.",
+      "audio": "promo/zerowrite-youtube-04/vo-3.wav",
+      "voSec": 9.02
+    },
+    {
+      "type": "resilient",
+      "chapter": "Protection that stays on",
+      "vo": "Losing the network never lowers protection. And an expired subscription never disables it. The updates stop, but the protection does not.",
+      "caption": "Losing the network never lowers protection. And an expired subscription never disables it. Updates stop. Protection does not.",
+      "audio": "promo/zerowrite-youtube-04/vo-4.wav",
+      "voSec": 7.105
+    },
+    {
+      "type": "cta",
+      "chapter": "Free trial",
+      "vo": "Your machine stays in your hands. Try Zero Write free, no card needed, at zero write dot A I.",
+      "caption": "Your machine stays in your hands. Try ZeroWrite free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-04/vo-5.wav",
+      "voSec": 5.914
+    }
+  ]
+}

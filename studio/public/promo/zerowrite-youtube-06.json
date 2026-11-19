@@ -1,0 +1,48 @@
+{
+  "name": "zerowrite-youtube-06",
+  "status": "DRAFT - fleet portal angle ('one portal, every machine'); wording from zerowrite.ai (Response & fleet page, home 'Who it's for', platform FAQ), claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "portal",
+      "chapter": "Many machines, one account",
+      "vo": "Looking after many Windows machines, for your business or for your clients? With Zero Write, licences, devices and a policy per licence are managed from one account.",
+      "caption": "Looking after many Windows machines, for your business or for your clients? With ZeroWrite, licences, devices and a policy per licence are managed from one account.",
+      "audio": "promo/zerowrite-youtube-06/vo-1.wav",
+      "voSec": 8.819
+    },
+    {
+      "type": "policy",
+      "chapter": "Set policy once",
+      "vo": "Open the policy. Set sensitivity, auto quarantine and drive scanning once per licence. Policy is set once, for the whole fleet.",
+      "caption": "Open the policy. Set sensitivity, auto-quarantine and drive scanning once per licence. Policy is set once, for the whole fleet.",
+      "audio": "promo/zerowrite-youtube-06/vo-2.wav",
+      "voSec": 7.256
+    },
+    {
+      "type": "globe",
+      "chapter": "Every machine picks it up",
+      "vo": "A policy change ripples out to every machine. Each one picks it up at its next check in. One portal, every machine.",
+      "caption": "A policy change ripples out to every machine. Each one picks it up at its next check-in. One portal, every machine.",
+      "audio": "promo/zerowrite-youtube-06/vo-3.wav",
+      "voSec": 6.606
+    },
+    {
+      "type": "inbox",
+      "chapter": "Decide from the portal",
+      "vo": "And when a file is held, decide from the machine, or from the portal. Allow, restore or delete. Every decision is on the record.",
+      "caption": "And when a file is held, decide from the machine, or from the portal. Allow, restore or delete. Every decision is on the record.",
+      "audio": "promo/zerowrite-youtube-06/vo-4.wav",
+      "voSec": 7.024
+    },
+    {
+      "type": "cta",
+      "chapter": "Try it free",
+      "vo": "Zero Write. From one laptop to a whole fleet. Try it free, no card needed, at zero write dot A I.",
+      "caption": "ZeroWrite. From one laptop to a whole fleet. Try it free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-06/vo-5.wav",
+      "voSec": 6.07
+    }
+  ]
+}

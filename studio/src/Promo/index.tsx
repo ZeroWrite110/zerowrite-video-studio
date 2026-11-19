@@ -35,6 +35,10 @@ import { Define, DEFINE_AT } from "./scenes/Define";
 import { Checkpoint, CHECKPOINT_AT } from "./scenes/Checkpoint";
 import { Signatures, SIGNATURES_AT } from "./scenes/Signatures";
 import { Recap, RECAP_AT } from "./scenes/Recap";
+import { Portal, PORTAL_AT } from "./scenes/Portal";
+import { Policy, POLICY_AT } from "./scenes/Policy";
+import { Globe, GLOBE_AT } from "./scenes/Globe";
+import { Inbox, INBOX_AT } from "./scenes/Inbox";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -55,6 +59,10 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   checkpoint: 0.6,
   signatures: 0.8,
   recap: 1.1,
+  portal: 0.8,
+  policy: 0.8,
+  globe: 1.3,
+  inbox: 0.9,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -85,7 +93,12 @@ type SceneType =
   | "define"
   | "checkpoint"
   | "signatures"
-  | "recap";
+  | "recap"
+  // video 06 (fleet portal: one portal, every machine)
+  | "portal"
+  | "policy"
+  | "globe"
+  | "inbox";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -180,6 +193,14 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Signatures />;
     case "recap":
       return <Recap />;
+    case "portal":
+      return <Portal />;
+    case "policy":
+      return <Policy />;
+    case "globe":
+      return <Globe />;
+    case "inbox":
+      return <Inbox />;
   }
 };
 
@@ -298,6 +319,30 @@ const sceneSfx = (type: SceneType) => {
         ...RECAP_AT.steps.map((s) => <Sfx key={s} at={s * FPS - 6} src="whip" volume={0.45} />),
         <Sfx key="v" at={RECAP_AT.verdict * FPS} src="whoosh" volume={0.5} />,
       ];
+    case "portal":
+      return [
+        <Sfx key="w" at={PORTAL_AT.window * FPS} src="whoosh" volume={0.5} />,
+        ...[PORTAL_AT.licences, PORTAL_AT.devices, PORTAL_AT.policy].map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.45} />),
+      ];
+    case "policy":
+      return [
+        <Sfx key="s" at={POLICY_AT.sensitivity * FPS} src="whoosh" volume={0.3} />,
+        <Sfx key="q" at={POLICY_AT.quarantine * FPS} src="switch" volume={0.6} />,
+        <Sfx key="d" at={POLICY_AT.drives * FPS} src="switch" volume={0.6} />,
+        <Sfx key="c" at={POLICY_AT.save * FPS} src="mouse-click" volume={0.7} />,
+        <Sfx key="f" at={(POLICY_AT.save + 0.2) * FPS} src="whoosh" volume={0.45} />,
+      ];
+    case "globe":
+      return [
+        <Sfx key="r" at={GLOBE_AT.ripple * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="c" at={GLOBE_AT.checkin * FPS} src="switch" volume={0.4} />,
+        <Sfx key="e" at={GLOBE_AT.every * FPS} src="whip" volume={0.45} />,
+      ];
+    case "inbox":
+      return [
+        ...[INBOX_AT.allow, INBOX_AT.restore, INBOX_AT.remove].map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.5} />),
+        <Sfx key="r" at={INBOX_AT.record * FPS} src="whoosh" volume={0.4} />,
+      ];
     default:
       return [];
   }
@@ -324,6 +369,10 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     // define and recap already spell the line out on screen
     "checkpoint",
     "signatures",
+    "portal",
+    "policy",
+    "globe",
+    "inbox",
   ];
   return (
     <AbsoluteFill>

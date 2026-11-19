@@ -48,6 +48,10 @@ import { Fingerprint, FINGERPRINT_AT } from "./scenes/Fingerprint";
 import { Variants, VARIANTS_AT } from "./scenes/Variants";
 import { Waitline, WAITLINE_AT } from "./scenes/Waitline";
 import { Onsite, ONSITE_AT } from "./scenes/Onsite";
+import { Upload, UPLOAD_AT } from "./scenes/Upload";
+import { NoCopy, NOCOPY_AT } from "./scenes/NoCopy";
+import { Consent, CONSENT_AT } from "./scenes/Consent";
+import { Vault, VAULT_AT } from "./scenes/Vault";
 
 const FPS = 30;
 const VO_DELAY = 8; // frames before the voice starts in each scene
@@ -81,6 +85,10 @@ const HOLD_SEC: Partial<Record<SceneType, number>> = {
   variants: 0.8,
   waitline: 1.0,
   onsite: 1.2,
+  upload: 1.1,
+  nocopy: 1.1,
+  consent: 1.4,
+  vault: 1.6,
 };
 const LEAK = 22; // light-leak overlay length at each cut
 
@@ -127,7 +135,12 @@ type SceneType =
   | "fingerprint"
   | "variants"
   | "waitline"
-  | "onsite";
+  | "onsite"
+  // video 09 (privacy: your files stay yours)
+  | "upload"
+  | "nocopy"
+  | "consent"
+  | "vault";
 type Scene = {
   type: SceneType;
   chapter: string;
@@ -248,6 +261,14 @@ const Visual: React.FC<{ type: SceneType }> = ({ type }) => {
       return <Waitline />;
     case "onsite":
       return <Onsite />;
+    case "upload":
+      return <Upload />;
+    case "nocopy":
+      return <NoCopy />;
+    case "consent":
+      return <Consent />;
+    case "vault":
+      return <Vault />;
   }
 };
 
@@ -441,6 +462,31 @@ const sceneSfx = (type: SceneType) => {
         <Sfx key="v" at={(ONSITE_AT.verdict - 0.1) * FPS} src="whip" volume={0.55} />,
         <Sfx key="r" at={ONSITE_AT.reputation * FPS} src="whoosh" volume={0.35} />,
       ];
+    case "upload":
+      return [
+        <Sfx key="c" at={UPLOAD_AT.checks * FPS} src="switch" volume={0.4} />,
+        <Sfx key="w" at={(UPLOAD_AT.where - 0.5) * FPS} src="whoosh" volume={0.5} />,
+        <Sfx key="q" at={UPLOAD_AT.fair * FPS} src="whip" volume={0.45} />,
+      ];
+    case "nocopy":
+      return [
+        <Sfx key="r" at={NOCOPY_AT.runs * FPS} src="switch" volume={0.45} />,
+        <Sfx key="g" at={(NOCOPY_AT.copy - 0.2) * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="x" at={(NOCOPY_AT.copy + 0.3) * FPS} src="whip" volume={0.5} />,
+        ...NOCOPY_AT.reasons.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.4} />),
+      ];
+    case "consent":
+      return [
+        <Sfx key="s" at={(CONSENT_AT.sent - 0.1) * FPS} src="whoosh" volume={0.45} />,
+        <Sfx key="d" at={CONSENT_AT.shown * FPS} src="whip" volume={0.4} />,
+        <Sfx key="c" at={CONSENT_AT.agree * FPS} src="mouse-click" volume={0.7} />,
+      ];
+    case "vault":
+      return [
+        ...VAULT_AT.records.map((s) => <Sfx key={s} at={s * FPS} src="switch" volume={0.3} />),
+        <Sfx key="l" at={VAULT_AT.stays * FPS} src="whoosh" volume={0.5} />,
+        <Sfx key="t" at={(VAULT_AT.switchable + 1.0) * FPS} src="switch" volume={0.6} />,
+      ];
     default:
       return [];
   }
@@ -480,6 +526,10 @@ export const YouTubePromo: React.FC<Props> = ({ loaded, captions, music }) => {
     "variants",
     "waitline",
     "onsite",
+    "upload",
+    "nocopy",
+    "consent",
+    "vault",
   ];
   return (
     <AbsoluteFill>

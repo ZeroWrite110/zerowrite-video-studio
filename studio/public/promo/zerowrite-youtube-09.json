@@ -1,0 +1,48 @@
+{
+  "name": "zerowrite-youtube-09",
+  "status": "DRAFT - privacy angle 'your files stay yours'; wording from the zerowrite.ai website (about page principle 'Your files stay yours', docs 'Privacy in practice' and 'Acting on an alert'), claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "upload",
+      "chapter": "Where do your files go?",
+      "vo": "When security software checks a file on your computer, where does that file go? It is a fair question.",
+      "caption": "When security software checks a file on your computer, where does that file go? It is a fair question.",
+      "audio": "promo/zerowrite-youtube-09/vo-1.wav",
+      "voSec": 5.304
+    },
+    {
+      "type": "nocopy",
+      "chapter": "Allowed files are never copied",
+      "vo": "If Zero Write lets a file run, it never takes a copy of it. Not for analysis. Not for research. Not for training models.",
+      "caption": "If ZeroWrite lets a file run, it never takes a copy of it. Not for analysis. Not for research. Not for training models.",
+      "audio": "promo/zerowrite-youtube-09/vo-2.wav",
+      "voSec": 6.699
+    },
+    {
+      "type": "consent",
+      "chapter": "Blocked files: you decide",
+      "vo": "Blocked files are different. A blocked program is sent to check the decision. A blocked document, archive or script is shown to you first, and sent only if you agree.",
+      "caption": "Blocked files are different. A blocked program is sent to check the decision. A blocked document, archive or script is shown to you first, and sent only if you agree.",
+      "audio": "promo/zerowrite-youtube-09/vo-3.wav",
+      "voSec": 9.323
+    },
+    {
+      "type": "vault",
+      "chapter": "Your history stays on your machine",
+      "vo": "Every action is written to a local event history. That history stays on your machine. And every part of this is switchable.",
+      "caption": "Every action is written to a local event history. That history stays on your machine. And every part of this is switchable.",
+      "audio": "promo/zerowrite-youtube-09/vo-4.wav",
+      "voSec": 6.502
+    },
+    {
+      "type": "cta",
+      "chapter": "Try it free",
+      "vo": "Zero Write. Stop threats before they run. Try it free, no card needed, at zero write dot A I.",
+      "caption": "ZeroWrite. Stop threats before they run. Try it free, no card needed, at zerowrite.ai.",
+      "audio": "promo/zerowrite-youtube-09/vo-5.wav",
+      "voSec": 5.968
+    }
+  ]
+}

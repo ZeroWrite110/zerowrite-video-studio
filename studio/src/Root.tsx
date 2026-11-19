@@ -18,6 +18,12 @@ import {
   explainerDefaults,
   explainerSchema,
 } from "./Explainer";
+import {
+  YouTubePromo,
+  calculatePromoMetadata,
+  promoDefaults,
+  promoSchema,
+} from "./Promo";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -54,6 +60,17 @@ export const RemotionRoot: React.FC = () => {
         schema={explainerSchema}
         defaultProps={explainerDefaults}
         calculateMetadata={calculateExplainerMetadata}
+      />
+      <Composition
+        id="YouTubePromo"
+        component={YouTubePromo}
+        durationInFrames={1500}
+        fps={30}
+        width={1920}
+        height={1080}
+        schema={promoSchema}
+        defaultProps={promoDefaults}
+        calculateMetadata={calculatePromoMetadata}
       />
     </Folder>
   );

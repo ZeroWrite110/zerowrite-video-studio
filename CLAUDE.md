@@ -13,10 +13,16 @@ Owner is a non-coder who speaks Roman Urdu/Hindi. They ask for edits in plain wo
   Joins the folder's clips (file-name order; fitted to first clip's frame, 30fps), cuts silences (adaptive loudnorm threshold, pauses >0.6s, 0.15s pad; no-audio b-roll clips are always kept), transcribes only the kept audio with whisper.cpp 1.5.5 `small` (`studio/whisper.cpp`, gitignored), writes `public/projects/<slug>.json` and `public/captions/<slug>.json` (already on the cut timeline).
 - `npm run make -- <video-name> [--size 9:16|16:9|1:1] [--hook "..."] [--position middle|lower] [--color "#hex"] [--no-zoom] [--no-progress] [--no-captions] [--still]`
 - `npm run make -- --text <name> [--still]` renders TextReel from `studio/text-reels/<name>.json`.
+- `npm run make -- --promo <name> [--still --frame N] [--no-captions] [--no-music]` renders the 16:9 YouTubePromo (`src/Promo/`) from `studio/promos/<name>.json`; make the voice first with `node scripts/voiceover.mjs <name> --promo`.
 - `npm run dev` (Studio preview), `npm run lint`.
 - `src/brand.ts`: font (Inter) and colors. Update it from `Brand Kit/colors.txt` when present.
 - `src/CaptionedReel/`: footage + jump cuts + TikTok-style captions + hook + punch-in zoom + progress bar.
 - `src/TextReel/`: text scenes with slide transitions, optional music from `public/music`.
+
+## YouTube promo (16:9 motion graphics)
+- Scenes: hook, problem, reveal, how, features, cta (`src/Promo/scenes`). GSAP is used only through `useGsapTimeline` from `@remotion/gsap` (deterministic). 3D uses `@remotion/three`, motion blur uses `HtmlInCanvasMotionBlur`, and light leaks use `@remotion/effects` (WebGL: `Config.setChromiumOpenGlRenderer("angle")`).
+- Assets must have a free licence. List each one in `Export/<name>/credits.txt`. SFX in `public/sfx` are CC0. The music file (Mixkit) is gitignored, so download it again from the URL in credits.txt.
+- Put the claims that need approval, plus the YouTube title, description, chapters and tags, in `Export/<name>/notes.txt`.
 
 ## Gotchas
 - In this harness, refresh PATH from Machine+User env vars in PowerShell before node/ffmpeg.

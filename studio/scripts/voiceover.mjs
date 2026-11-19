@@ -1,11 +1,12 @@
 // Make the voiceover for an explainer script with Piper (free, runs locally).
 //
 // Usage (from the studio folder):
-//   node scripts/voiceover.mjs <name>      reads explainers/<name>.json
+//   node scripts/voiceover.mjs <name>          reads explainers/<name>.json
+//   node scripts/voiceover.mjs <name> --promo  reads promos/<name>.json
 //
-// Writes public/explainers/<name>/vo-<n>.wav and public/explainers/<name>.json
-// (the script plus each scene's audio file and duration), which the Explainer
-// template reads.
+// Writes public/<explainers|promo>/<name>/vo-<n>.wav and
+// public/<explainers|promo>/<name>.json (the script plus each scene's audio
+// file and duration), which the Explainer / YouTubePromo templates read.
 
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
@@ -21,15 +22,18 @@ const VOICES =
 // Leading silence is removed with silenceremove; keep this at 0 (Piper speech starts immediately).
 const TRIM_START_SEC = 0;
 
-const name = process.argv[2];
+const promo = process.argv.includes("--promo");
+const SRC_DIR = promo ? "promos" : "explainers";
+const PUBLIC_DIR = promo ? "promo" : "explainers";
+const name = process.argv.slice(2).find((a) => !a.startsWith("--"));
 if (!name) {
   console.log("Usage: node scripts/voiceover.mjs <name>");
   process.exit(1);
 }
 const script = JSON.parse(
-  fs.readFileSync(path.join(STUDIO, "explainers", `${name}.json`), "utf8"),
+  fs.readFileSync(path.join(STUDIO, SRC_DIR, `${name}.json`), "utf8"),
 );
-const outDir = path.join(STUDIO, "public", "explainers", name);
+const outDir = path.join(STUDIO, "public", PUBLIC_DIR, name);
 fs.mkdirSync(outDir, { recursive: true });
 const voice = path.join(VOICES, `${script.voice ?? "en_US-ryan-high"}.onnx`);
 
@@ -83,13 +87,13 @@ const scenes = script.scenes.map((scene, i) => {
   console.log(`  scene ${i + 1} (${scene.type}): ${durationSec.toFixed(2)}s`);
   return {
     ...scene,
-    audio: `explainers/${name}/${file}`,
+    audio: `${PUBLIC_DIR}/${name}/${file}`,
     voSec: Math.round(durationSec * 1000) / 1000,
   };
 });
 
 fs.writeFileSync(
-  path.join(STUDIO, "public", "explainers", `${name}.json`),
+  path.join(STUDIO, "public", PUBLIC_DIR, `${name}.json`),
   JSON.stringify({ ...script, scenes }, null, 2),
 );
-console.log(`ready: public/explainers/${name}.json`);
+console.log(`ready: public/${PUBLIC_DIR}/${name}.json`);

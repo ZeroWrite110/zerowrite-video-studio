@@ -11,3 +11,5 @@ Config.setRspack(true);
 Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
 Config.setDefaultPremountInSeconds(2);
+// WebGL for 3D (@remotion/three) and light leaks (@remotion/effects).
+Config.setChromiumOpenGlRenderer("angle");

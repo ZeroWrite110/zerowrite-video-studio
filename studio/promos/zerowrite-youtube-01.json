@@ -1,0 +1,38 @@
+{
+  "name": "zerowrite-youtube-01",
+  "status": "DRAFT - wording taken from zerowrite.ai, claims pending owner approval",
+  "voice": "en_US-ryan-high",
+  "music": "promo/mixkit-140.mp3",
+  "scenes": [
+    {
+      "type": "hook",
+      "chapter": "The problem",
+      "vo": "By the time an alert fires, the damage has started."
+    },
+    {
+      "type": "problem",
+      "chapter": "Unknown code",
+      "vo": "A new download, a script, an injected process. Whatever it was written to do, it starts the moment it runs."
+    },
+    {
+      "type": "reveal",
+      "chapter": "Meet ZeroWrite",
+      "vo": "Zero Write stops threats before they run."
+    },
+    {
+      "type": "how",
+      "chapter": "How it works",
+      "vo": "Every new file is held, before its first instruction. Its behaviours are scored, one by one, until the engine reaches a verdict. Decided right here, while the program is still waiting."
+    },
+    {
+      "type": "features",
+      "chapter": "Features",
+      "vo": "Removable drives are scanned the moment they connect. Critical files can be quarantined automatically. Tamper protection means nobody at the machine can lower protection. And one portal pushes policy to every machine."
+    },
+    {
+      "type": "cta",
+      "chapter": "Free trial",
+      "vo": "Zero Write. Stop threats before they run. For Windows ten and eleven. Start your free trial at zero write dot A I. No card needed."
+    }
+  ]
+}

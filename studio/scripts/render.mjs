@@ -6,7 +6,10 @@
 //   node scripts/render.mjs --text <name>                   TextReel from text-reels/<name>.json
 //   node scripts/render.mjs --explainer <name>              voiced Explainer from explainers/<name>.json
 //                                                           (run scripts/voiceover.mjs <name> first; --no-subtitles)
-//   add --still to render only a preview image (frame 30)
+//   node scripts/render.mjs --promo <name>                  16:9 YouTubePromo from promos/<name>.json
+//                                                           (run scripts/voiceover.mjs <name> --promo first;
+//                                                           --no-captions, --no-music)
+//   add --still to render only a preview image (frame 30, or --frame <n>)
 //
 // Options for CaptionedReel: --size 9:16|16:9|1:1, --position middle|lower,
 // --color "#FFD60A", --no-zoom, --no-progress, --no-captions
@@ -43,6 +46,8 @@ const valueFlags = new Set([
   "--text",
   "--size",
   "--explainer",
+  "--promo",
+  "--frame",
 ]);
 const positional = args.filter(
   (a, i) => !a.startsWith("--") && !valueFlags.has(args[i - 1]),
@@ -53,7 +58,19 @@ let props;
 let outName;
 let captionsFile = null;
 
-if (option("--explainer")) {
+if (option("--promo")) {
+  const name = option("--promo");
+  if (!fs.existsSync(path.join(STUDIO, "public", "promo", `${name}.json`))) {
+    throw new Error(`No voiceover yet. Run: node scripts/voiceover.mjs ${name} --promo`);
+  }
+  composition = "YouTubePromo";
+  props = {
+    script: name,
+    captions: !flag("--no-captions"),
+    music: !flag("--no-music"),
+  };
+  outName = name;
+} else if (option("--explainer")) {
   const name = option("--explainer");
   if (!fs.existsSync(path.join(STUDIO, "public", "explainers", `${name}.json`))) {
     throw new Error(`No voiceover yet. Run: node scripts/voiceover.mjs ${name}`);
@@ -103,9 +120,13 @@ const propsFile = path.join(tmp, `${outName}.props.json`);
 fs.writeFileSync(propsFile, JSON.stringify(props));
 
 const still = flag("--still");
-const target = path.join(outDir, still ? "preview.png" : "video.mp4");
+const stillFrame = option("--frame") ?? "30";
+const target = path.join(
+  outDir,
+  still ? (option("--frame") ? `preview-${stillFrame}.png` : "preview.png") : "video.mp4",
+);
 const cliArgs = still
-  ? ["still", composition, target, `--props=${propsFile}`, "--frame=30"]
+  ? ["still", composition, target, `--props=${propsFile}`, `--frame=${stillFrame}`]
   : [
       "render",
       composition,

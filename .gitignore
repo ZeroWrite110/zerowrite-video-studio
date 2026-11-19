@@ -19,3 +19,6 @@ studio/public/explainers/*/
 node_modules/
 .DS_Store
 .env
+
+# CC0 sound effects are small and needed to rebuild videos
+!studio/public/sfx/*.wav
